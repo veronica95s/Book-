@@ -12,23 +12,23 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String nome;
 
     public Person() { }
 
-    public Person(String name) {
-        this.name = name;
+    public Person(String nome) {
+        this.nome = nome;
     }
 
     public Long getId() {
         return id;
     }
     
-    public String getName() {
-        return name;
+    public String getnome() {
+        return nome;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setnome(String nome) {
+        this.nome = nome;
     }
 }

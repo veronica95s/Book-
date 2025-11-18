@@ -12,36 +12,35 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String title;
+    private String titulo;
 
     @ManyToOne
-    private Person author;
+    private Person autor;
 
     public Book() { }
 
-    public Book(String title, Person author) {
-        this.title = title;
-        this.author = author;
+    public Book(String titulo, Person autor) {
+        this.titulo = titulo;
+        this.autor = autor;
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getTitle() {
-        return title;
+    public String gettitulo() {
+        return titulo;
     }
 
-    public Person getAuthor() {
-        return author;
+    public Person getautor() {
+        return autor;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void settitulo(String titulo) {
+        this.titulo = titulo;
     }
 
-    public void setAuthor(Person author) {
-        this.author = author;
+    public void setautor(Person autor) {
+        this.autor = autor;
     }
 }
