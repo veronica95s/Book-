@@ -10,8 +10,12 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.example.demo.model.Book;
 import com.example.demo.model.Person;
+import org.springframework.test.context.ActiveProfiles;
+
 
 @DataJpaTest
+@ActiveProfiles("test")
+
 class BookRepositoryTest {
 
     @Autowired

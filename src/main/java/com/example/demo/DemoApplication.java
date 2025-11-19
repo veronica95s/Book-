@@ -4,6 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 
 import com.example.demo.model.Book;
 import com.example.demo.model.Person;
@@ -18,6 +19,8 @@ public class DemoApplication {
     }
 
     @Bean
+    @Profile("!test")
+
     CommandLineRunner initDatabase(BookRepository bookRepo, PersonRepository personRepo) {
         return args -> {
 

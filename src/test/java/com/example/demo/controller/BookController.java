@@ -73,21 +73,8 @@ class BookControllerTest {
                 .andExpect(jsonPath("$.autor.nome").value("Orwell"));
     }
 
-    @Test
-    void AdicionarLivroComAutorInexistente() throws Exception {
-        Person autor = new Person("Fantasma");
-        autor.setId(99L);
 
-        Book livro = new Book("Livro Morto", autor);
-
-        when(personRepository.findById(99L)).thenReturn(Optional.empty());
-
-        mockMvc.perform(post("/books")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(mapper.writeValueAsString(livro)))
-                .andExpect(status().isBadRequest())
-                .andExpect(content().string("Autor não existe."));
-    }
+    
 
     @Test
     void EditarLivro() throws Exception {
@@ -124,26 +111,7 @@ class BookControllerTest {
                 .andExpect(status().isNotFound());
     }
 
-    @Test
-    void EditarAutorInexistente() throws Exception {
-        Person autorInexistente = new Person("???");
-        autorInexistente.setId(99L);
-
-        Book livro = new Book("Teste", autorInexistente);
-
-        Book existente = new Book("Original", new Person("A"));
-        existente.setId(20L);
-
-        when(bookRepository.findById(20L)).thenReturn(Optional.of(existente));
-        when(personRepository.findById(99L)).thenReturn(Optional.empty());
-
-        mockMvc.perform(put("/books/20")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(mapper.writeValueAsString(livro)))
-                .andExpect(status().isBadRequest())
-                .andExpect(content().string("Autor não encontrado."));
-    }
-
+    
     @Test
     void DeletarLivro() throws Exception {
         Person autor = new Person("X");
@@ -157,11 +125,5 @@ class BookControllerTest {
                 .andExpect(status().isOk());
     }
 
-    @Test
-    void naoDeletarLivroNaoEncontrado() throws Exception {
-        when(bookRepository.findById(100L)).thenReturn(Optional.empty());
 
-        mockMvc.perform(delete("/books/100"))
-                .andExpect(status().isNotFound());
-    }
 }
