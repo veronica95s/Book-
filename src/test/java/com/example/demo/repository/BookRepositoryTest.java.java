@@ -54,24 +54,37 @@ class BookRepositoryTest {
     }
 
     @Test
-void EncontrarLivrosPorTitulo() {
-    Person autor = personRepository.save(new Person("J. K. Rowling"));
-    bookRepository.save(new Book("Harry Potter", autor));
+void EncontrarPorTitulo() {
+    Person autor = personRepository.save(new Person("Anthony Burgess"));
+    bookRepository.save(new Book("Laranja Mecânica", autor));
 
-    List<Book> encontrados = bookRepository.findByTitulo("Harry Potter");
+    List<Book> encontrados = bookRepository.findByTituloContainingIgnoreCase("Laranja Mecânica");
+
 
     assertThat(encontrados).isNotEmpty();
-    assertThat(encontrados.get(0).gettitulo()).isEqualTo("Harry Potter");
+    assertThat(encontrados.get(0).gettitulo()).isEqualTo("Laranja Mecânica");
 }
 
 @Test
-void EncontrarLivrosPorNomeDoAutor() {
-    Person autor = personRepository.save(new Person("Neil Gaiman"));
-    bookRepository.save(new Book("Coraline", autor));
-    bookRepository.save(new Book("Deuses Americanos", autor));
+void EncontraPorNomeDoAutor() {
+    Person autor = personRepository.save(new Person("George Orwell"));
+    bookRepository.save(new Book("A Revolução dos Bichos", autor));
+    bookRepository.save(new Book("1984", autor));
 
-    List<Book> encontrados = bookRepository.findByAutor_Nome("Neil Gaiman");
+    List<Book> encontrados =
+        bookRepository.findByAutor_NomeContainingIgnoreCase("Orwell");
 
-    assertThat(encontrados).hasSize(2);
+        assertThat(encontrados).hasSize(2);
+
 }
+
+ @Test
+    void DeletarLivro() {
+        Person autor = personRepository.save(new Person("Autor X"));
+        Book livro = bookRepository.save(new Book("Livro X", autor));
+
+        bookRepository.delete(livro);
+
+        assertThat(bookRepository.findById(livro.getId())).isEmpty();
+    }
 }
