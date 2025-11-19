@@ -42,7 +42,7 @@ class BookControllerTest {
 
  
     @Test
-    void deveRetornarListaDeLivros() throws Exception {
+    void RetornarListaDeLivros() throws Exception {
         Person autor = new Person("Orwell");
         Book book = new Book("1984", autor);
 
@@ -56,7 +56,7 @@ class BookControllerTest {
 
  
     @Test
-    void deveAdicionarLivro() throws Exception {
+    void AdicionarLivro() throws Exception {
         Person autor = new Person("Orwell");
         autor.setId(1L);
 
@@ -74,7 +74,7 @@ class BookControllerTest {
     }
 
     @Test
-    void DeveAdicionarLivroComAutorInexistente() throws Exception {
+    void AdicionarLivroComAutorInexistente() throws Exception {
         Person autor = new Person("Fantasma");
         autor.setId(99L);
 
@@ -115,7 +115,7 @@ class BookControllerTest {
     }
 
     @Test
-    void DeveEditarLivroNaoEncontrado() throws Exception {
+    void EditarLivroNaoEncontrado() throws Exception {
         when(bookRepository.findById(50L)).thenReturn(Optional.empty());
 
         mockMvc.perform(put("/books/50")
