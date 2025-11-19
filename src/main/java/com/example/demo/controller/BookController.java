@@ -49,6 +49,11 @@ public class BookController {
         );
     }
 
+    @PostMapping("/autor")
+        public Person criarAutor(@RequestBody Person person) {
+            return personRepository.save(person);
+        }
+
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody Book book) {
